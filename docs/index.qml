@@ -28,7 +28,37 @@ Beschreibung Projekt
 
 ## Daten
 
-Beschreibung Daten
+Der Datensatz enthält Messdaten
+
+-   zu rund 500 Standorten
+
+-   aus jeweils 2 Entnahmetiefen
+
+-   aus 6 Zeitpunkten
+
+-   für x Analyseparameter
+
+Die Standorte lassen sich gliedern nach
+
+-   Gemeinde
+
+-   Status (Haupt-/Nebenstandorte)
+
+-   Nutzungsart
+
+Die Daten können enthalten:
+
+-   NAs wenn nicht gemessen
+
+-   Platzhalterwert wenn unterhalb technischer Bestimmungsgrenze
+
+Weiter hinzugefügt werden könnten (Zusatzdaten notwendig):
+
+-   regionale Gruppierung
+
+-   teilweise Beurteilungsgrenzwerte
+
+Durch das Vorhandensein von Koordinaten zu den Standorten können diese auch geographisch dargestellt werden
 
 ## Analyseziele
 
