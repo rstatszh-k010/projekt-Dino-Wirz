@@ -2,7 +2,7 @@
 
 **Datenquellen: ** [Standortinformationen (lokal erzeugt)](gemeinden.csv)
 ** [Messdaten (lokal erzeugt)](kabodaten.csv)
-**Code (Link anpassen)**: [Quarto Datei](https://github.com/rstatszh-k010/projekt-Dino-Wirz/blob/master/docs/index.qml)
+**Code **: [Quarto Datei](https://github.com/rstatszh-k010/projekt-Dino-Wirz/blob/master/docs/index.qml)
 
 ## Projektbeschreibung
 
@@ -26,7 +26,7 @@ Hier sind die bereinigten Rohdaten zu finden.
 
 Vielen Dank an folgende Personen die mitgewirkt haben: 
 
-[@Dino-Wirz](https://github.com/larnsce) (diesen Eintrag entfernen und durch alle Namen ersetzten, welche dem Projekt beigetragen haben)
+[@Dino-Wirz](https://github.com/Dino-Wirz) 
 
 ## Kontakt
 

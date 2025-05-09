@@ -87,7 +87,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#analyseziele" id="toc-analyseziele" class="nav-link" data-scroll-target="#analyseziele">Analyseziele</a></li>
   </ul></li>
   <li><a href="#daten-aufbereitung" id="toc-daten-aufbereitung" class="nav-link" data-scroll-target="#daten-aufbereitung">Daten Aufbereitung</a></li>
-  <li><a href="#daten-visualisierung" id="toc-daten-visualisierung" class="nav-link" data-scroll-target="#daten-visualisierung">Daten Visualisierung</a></li>
+  <li><a href="#daten-visualisierung" id="toc-daten-visualisierung" class="nav-link" data-scroll-target="#daten-visualisierung">Daten Visualisierung</a>
+  <ul class="collapse">
+  <li><a href="#zustand-aktuellste-werte" id="toc-zustand-aktuellste-werte" class="nav-link" data-scroll-target="#zustand-aktuellste-werte">Zustand (aktuellste Werte)</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -141,83 +144,264 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="daten-aufbereitung" class="level1">
 <h1>Daten Aufbereitung</h1>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rohdaten aufbereiten:</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1.Tabelle mit Standortinformationen</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># unnötige Spalten entfernen</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="ot">&lt;-</span> <span class="fu">select</span>(gemeinden_roh,StandortID,PolitGemeinde,x_200,y_200) <span class="sc">|&gt;</span> </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Formatierung Gemeindenamen</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_to_title</span>(PolitGemeinde), <span class="at">.keep =</span> <span class="st">"unused"</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_remove_all</span>(Gemeinde, <span class="fu">fixed</span>(<span class="st">" (Zh)"</span>))) <span class="sc">|&gt;</span> </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_replace</span>(Gemeinde, <span class="st">" Am Albis"</span>, <span class="st">" a.A."</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_replace</span>(Gemeinde, <span class="st">" Am See"</span>, <span class="st">" a.S."</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_replace</span>(Gemeinde, <span class="st">" Am Irchel"</span>, <span class="st">" a.I."</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_replace</span>(Gemeinde, <span class="st">" An Der Thur"</span>, <span class="st">" a.d.T"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_replace</span>(Gemeinde, <span class="st">"ae"</span>, <span class="st">"ä"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_replace</span>(Gemeinde, <span class="st">"oe"</span>, <span class="st">"ö"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_replace</span>(Gemeinde, <span class="st">"ue"</span>, <span class="st">"ü"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_remove</span>(Gemeinde, <span class="st">" Zh"</span>))</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># formatierte Daten als csv ablegen</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(gemeinden,here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/processed/gemeinden_formatiert.csv"</span>))</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a> <span class="co"># 2.Tabelle mit Messdaten</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a> <span class="co"># unnötige Spalten entfernen</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>kabodaten <span class="ot">&lt;-</span> <span class="fu">select</span>(kabodaten_roh,</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>                    StandortID,</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>                    p.dat,</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>                    periode,</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                    KaboStatus,</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>                    AktStandorttyp,</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>                    Parameter,</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>                    <span class="at">WertOB =</span> Wert_plot_OB,</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>                    <span class="at">WertOB_tab =</span> Wert_tab_OB,</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>                    Klasse_OB,</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>                    <span class="at">WertUB =</span> Wert_plot_UB,</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>                    <span class="at">WertUB_tab =</span> Wert_tab_UB,</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>                    Klasse_UB) <span class="sc">|&gt;</span> <span class="fu">mutate</span>( </span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Datumswert von String in Datum umwandeln</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>                      <span class="at">p.dat =</span> <span class="fu">dmy</span>(p.dat)</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>                    ) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Spaltennamen und Textwerte vereinfachen</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>                      <span class="at">AktStandorttyp =</span> <span class="fu">case_when</span>(</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">startsWith</span>(AktStandorttyp,<span class="st">"Acker"</span>) <span class="sc">~</span> <span class="st">"Acker"</span>,</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>                        <span class="at">.default =</span> AktStandorttyp)</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>                    ) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>                        <span class="at">param_txt =</span> <span class="fu">case_when</span>(</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"HGT_PPM"</span> <span class="sc">~</span> <span class="st">"Quecksilber"</span>,</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"CDT_PPM"</span> <span class="sc">~</span> <span class="st">"Cadmium"</span>,</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"CUT_PPM"</span> <span class="sc">~</span> <span class="st">"Kupfer"</span>,</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"PBT_PPM"</span> <span class="sc">~</span> <span class="st">"Blei"</span>,</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"ZNT_PPM"</span> <span class="sc">~</span> <span class="st">"Zink"</span>,</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"CRT_PPM"</span> <span class="sc">~</span> <span class="st">"Chrom"</span>,</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"NIT_PPM"</span> <span class="sc">~</span> <span class="st">"Nickel"</span>,</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"ORG_SUB"</span> <span class="sc">~</span> <span class="st">"Organische Substanz"</span>,</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"PHCA"</span> <span class="sc">~</span> <span class="st">"pH"</span>,</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"LAGDICHT_BURG"</span> <span class="sc">~</span> <span class="st">"Lagerungsdichte"</span>,</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>                          <span class="at">.default =</span> <span class="cn">NA</span>)</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>                    ) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>                <span class="co"># neue Spalte mit Masseinheit</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>                        <span class="at">einheit =</span> <span class="fu">case_when</span>(</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">endsWith</span>(Parameter,<span class="st">"PPM"</span>) <span class="sc">~</span> <span class="st">"ppm"</span>,</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"ORG_SUB"</span> <span class="sc">~</span> <span class="st">"%"</span>,</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"PHCA"</span> <span class="sc">~</span> <span class="st">" "</span>,</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"LAGDICHT_BURG"</span> <span class="sc">~</span> <span class="st">"kg/l"</span>,</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>                          <span class="at">.default =</span> <span class="cn">NA</span>)</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>                    )</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a> <span class="co"># formatierte Tabelle als csv ablegen</span></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(kabodaten,here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/processed/kabodaten_formatiert.csv"</span>))</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. zusammenführen der beiden Tabellen</span></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a> <span class="co"># Darstellung aufräumen</span></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>kabo <span class="ot">&lt;-</span> <span class="fu">left_join</span>(kabodaten,gemeinden,<span class="at">by=</span><span class="st">"StandortID"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(StandortID,KaboStatus,AktStandorttyp,x_200,y_200,Gemeinde,periode,p.dat,param_txt,einheit,WertOB,WertOB_tab,Klasse_OB,WertUB,WertUB_tab,Klasse_UB)</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a> <span class="co"># komplette, formatierte Tabelle als csv ablegen</span></span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(kabo,here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/processed/daten_komplett.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># #| code-fold: show</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-overflow: wrap</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Rohdaten aufbereiten:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1.Tabelle mit Standortinformationen</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># unnötige Spalten entfernen</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="ot">&lt;-</span> <span class="fu">select</span>(gemeinden_roh,StandortID,PolitGemeinde,x_200,y_200) <span class="sc">|&gt;</span> </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Formatierung Gemeindenamen</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_to_title</span>(PolitGemeinde), <span class="at">.keep =</span> <span class="st">"unused"</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_remove_all</span>(Gemeinde, <span class="fu">fixed</span>(<span class="st">" (Zh)"</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_replace</span>(Gemeinde, <span class="st">" Am Albis"</span>, <span class="st">" a.A."</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_replace</span>(Gemeinde, <span class="st">" Am See"</span>, <span class="st">" a.S."</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_replace</span>(Gemeinde, <span class="st">" Am Irchel"</span>, <span class="st">" a.I."</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_replace</span>(Gemeinde, <span class="st">" An Der Thur"</span>, <span class="st">" a.d.T"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_replace</span>(Gemeinde, <span class="st">"ae"</span>, <span class="st">"ä"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_replace</span>(Gemeinde, <span class="st">"oe"</span>, <span class="st">"ö"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_replace</span>(Gemeinde, <span class="st">"ue"</span>, <span class="st">"ü"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gemeinde =</span> <span class="fu">str_remove</span>(Gemeinde, <span class="st">" Zh"</span>))</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># formatierte Daten als csv ablegen</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(gemeinden,here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/processed/gemeinden_formatiert.csv"</span>))</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a> <span class="co"># 2.Tabelle mit Messdaten</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a> <span class="co"># unnötige Spalten entfernen</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>kabodaten <span class="ot">&lt;-</span> <span class="fu">select</span>(kabodaten_roh,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>                    StandortID,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                    p.dat,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>                    periode,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>                    KaboStatus,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>                    AktStandorttyp,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>                    Parameter,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>                    <span class="at">WertOB =</span> Wert_plot_OB,</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>                    <span class="at">WertOB_tab =</span> Wert_tab_OB,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>                    Klasse_OB,</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>                    <span class="at">WertUB =</span> Wert_plot_UB,</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>                    <span class="at">WertUB_tab =</span> Wert_tab_UB,</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>                    Klasse_UB) <span class="sc">|&gt;</span> <span class="fu">mutate</span>( </span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Datumswert von String in Datum umwandeln</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>                      <span class="at">p.dat =</span> <span class="fu">dmy</span>(p.dat)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>                    ) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Spaltennamen und Textwerte vereinfachen</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>                      <span class="at">AktStandorttyp =</span> <span class="fu">case_when</span>(</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">startsWith</span>(AktStandorttyp,<span class="st">"Acker"</span>) <span class="sc">~</span> <span class="st">"Acker"</span>,</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>                        AktStandorttyp <span class="sc">==</span> <span class="st">""</span> <span class="sc">~</span> <span class="st">"Wald"</span>,</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>                        <span class="at">.default =</span> AktStandorttyp)</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>                    ) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>                        <span class="at">param_txt =</span> <span class="fu">case_when</span>(</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"HGT_PPM"</span> <span class="sc">~</span> <span class="st">"Quecksilber"</span>,</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"CDT_PPM"</span> <span class="sc">~</span> <span class="st">"Cadmium"</span>,</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"CUT_PPM"</span> <span class="sc">~</span> <span class="st">"Kupfer"</span>,</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"PBT_PPM"</span> <span class="sc">~</span> <span class="st">"Blei"</span>,</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"ZNT_PPM"</span> <span class="sc">~</span> <span class="st">"Zink"</span>,</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"CRT_PPM"</span> <span class="sc">~</span> <span class="st">"Chrom"</span>,</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"NIT_PPM"</span> <span class="sc">~</span> <span class="st">"Nickel"</span>,</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"ORG_SUB"</span> <span class="sc">~</span> <span class="st">"Organische Substanz"</span>,</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"PHCA"</span> <span class="sc">~</span> <span class="st">"pH"</span>,</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"LAGDICHT_BURG"</span> <span class="sc">~</span> <span class="st">"Lagerungsdichte"</span>,</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>                          <span class="at">.default =</span> <span class="cn">NA</span>)</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>                    ) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>                <span class="co"># neue Spalte mit Masseinheit</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>                        <span class="at">einheit =</span> <span class="fu">case_when</span>(</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">endsWith</span>(Parameter,<span class="st">"PPM"</span>) <span class="sc">~</span> <span class="st">"ppm"</span>,</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"ORG_SUB"</span> <span class="sc">~</span> <span class="st">"%"</span>,</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"PHCA"</span> <span class="sc">~</span> <span class="st">" "</span>,</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>                          Parameter <span class="sc">==</span> <span class="st">"LAGDICHT_BURG"</span> <span class="sc">~</span> <span class="st">"kg/l"</span>,</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>                          <span class="at">.default =</span> <span class="cn">NA</span>)</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>                    )</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a> <span class="co"># formatierte Tabelle als csv ablegen</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(kabodaten,here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/processed/kabodaten_formatiert.csv"</span>))</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. zusammenführen der beiden Tabellen</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a> <span class="co"># Darstellung aufräumen</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>kabo <span class="ot">&lt;-</span> <span class="fu">left_join</span>(kabodaten,gemeinden,<span class="at">by=</span><span class="st">"StandortID"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(StandortID,KaboStatus,AktStandorttyp,x_200,y_200,Gemeinde,periode,p.dat,param_txt,einheit,WertOB,WertOB_tab,Klasse_OB,WertUB,WertUB_tab,Klasse_UB)</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a> <span class="co"># komplette, formatierte Tabelle als csv ablegen</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(kabo,here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/processed/daten_komplett.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>Die aufbereiteten Daten können nun <a href="https://github.com/rstatszh-k010/projekt-Dino-Wirz/blob/master/daten/processed/daten_komplett.csv">hier</a> als Textfile betrachtet werden.</p>
 </section>
 <section id="daten-visualisierung" class="level1">
 <h1>Daten Visualisierung</h1>
+<section id="zustand-aktuellste-werte" class="level2">
+<h2 class="anchored" data-anchor-id="zustand-aktuellste-werte">Zustand (aktuellste Werte)</h2>
+<p>Im folgenden sind die Werte aus der letzten vollständig vorliegenden Überwachungsperiode (2015-2019) für den Oberboden abgebildet und in Tabellenform zusammengefasst.</p>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(kabo,param_txt<span class="sc">==</span><span class="st">"Kupfer"</span>,periode <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> AktStandorttyp,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> WertOB,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> AktStandorttyp)) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">26</span>) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey85"</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>())<span class="sc">+</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Standortnutzung"</span>)<span class="sc">+</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Gehalt [ppm]"</span>,<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">55</span>),<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">55</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Kupfer"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(kabo[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(kabo,param_txt<span class="sc">==</span><span class="st">"Quecksilber"</span>,periode <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> AktStandorttyp,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> WertOB,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> AktStandorttyp)) <span class="sc">+</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">26</span>) <span class="sc">+</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey85"</span>),</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>())<span class="sc">+</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Standortnutzung"</span>)<span class="sc">+</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Gehalt [ppm]"</span>,<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.25</span>),<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,.<span class="dv">25</span>,.<span class="dv">05</span>)) <span class="sc">+</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Quecksilber"</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(kabo[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">StandortID</th>
+<th style="text-align: left;">KaboStatus</th>
+<th style="text-align: left;">AktStandorttyp</th>
+<th style="text-align: right;">x_200</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">16219</td>
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Acker</td>
+<td style="text-align: right;">2701400</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1631</td>
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Acker</td>
+<td style="text-align: right;">2705000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="index_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">StandortID</th>
+<th style="text-align: left;">KaboStatus</th>
+<th style="text-align: left;">AktStandorttyp</th>
+<th style="text-align: right;">x_200</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">16219</td>
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Acker</td>
+<td style="text-align: right;">2701400</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1631</td>
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Acker</td>
+<td style="text-align: right;">2705000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1631</td>
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Acker</td>
+<td style="text-align: right;">2705000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1631</td>
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Acker</td>
+<td style="text-align: right;">2705000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1631</td>
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Acker</td>
+<td style="text-align: right;">2705000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1631</td>
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Acker</td>
+<td style="text-align: right;">2705000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6398</td>
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Wald</td>
+<td style="text-align: right;">2697400</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6398</td>
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Wald</td>
+<td style="text-align: right;">2697400</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6398</td>
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Wald</td>
+<td style="text-align: right;">2697400</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6398</td>
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Wald</td>
+<td style="text-align: right;">2697400</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6398</td>
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Wald</td>
+<td style="text-align: right;">2697400</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6398</td>
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Wald</td>
+<td style="text-align: right;">2697400</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6399</td>
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Wald</td>
+<td style="text-align: right;">2694200</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6399</td>
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Wald</td>
+<td style="text-align: right;">2694200</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6399</td>
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Wald</td>
+<td style="text-align: right;">2694200</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
 </section>
 
 </main>

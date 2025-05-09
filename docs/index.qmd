@@ -21,8 +21,9 @@ library(tidyverse)
 library(here)
 library(readr)
 library(lubridate)
-# library(devtools)
-# devtools::install_github("statistikZH/statR") # Kantons-CD installieren
+#library(devtools)
+#devtools::install_github("statistikZH/statR") # Kantons-CD installieren
+#library(statR)
 ```
 
 ```{r}
@@ -66,7 +67,7 @@ Nicht alle Parameter liegen an allen Standorten und Tiefen **lückenlos** vor. S
 # Daten Aufbereitung
 
 ```{r}
-#| code-fold: show
+# #| code-fold: show
 #| code-overflow: wrap
 # Rohdaten aufbereiten:
   # 1.Tabelle mit Standortinformationen
@@ -85,7 +86,7 @@ gemeinden <- select(gemeinden_roh,StandortID,PolitGemeinde,x_200,y_200) |>
   mutate(Gemeinde = str_replace(Gemeinde, "ue", "ü")) |> 
   mutate(Gemeinde = str_remove(Gemeinde, " Zh"))
   # formatierte Daten als csv ablegen
-write.csv(gemeinden,here::here("daten/processed/gemeinden_formatiert.csv"))
+write_csv(gemeinden,here::here("daten/processed/gemeinden_formatiert.csv"))
  # 2.Tabelle mit Messdaten
  # unnötige Spalten entfernen
 kabodaten <- select(kabodaten_roh,
@@ -107,6 +108,7 @@ kabodaten <- select(kabodaten_roh,
                 # Spaltennamen und Textwerte vereinfachen
                       AktStandorttyp = case_when(
                         startsWith(AktStandorttyp,"Acker") ~ "Acker",
+                        AktStandorttyp == "" ~ "Wald",
                         .default = AktStandorttyp)
                     ) |> mutate(
                         param_txt = case_when(
@@ -131,14 +133,57 @@ kabodaten <- select(kabodaten_roh,
                           .default = NA)
                     )
  # formatierte Tabelle als csv ablegen
-write.csv(kabodaten,here::here("daten/processed/kabodaten_formatiert.csv"))
+write_csv(kabodaten,here::here("daten/processed/kabodaten_formatiert.csv"))
 # 3. zusammenführen der beiden Tabellen
  # Darstellung aufräumen
 kabo <- left_join(kabodaten,gemeinden,by="StandortID") |> 
   select(StandortID,KaboStatus,AktStandorttyp,x_200,y_200,Gemeinde,periode,p.dat,param_txt,einheit,WertOB,WertOB_tab,Klasse_OB,WertUB,WertUB_tab,Klasse_UB)
  # komplette, formatierte Tabelle als csv ablegen
-write.csv(kabo,here::here("daten/processed/daten_komplett.csv"))
+write_csv(kabo,here::here("daten/processed/daten_komplett.csv"))
 
 ```
 
+Die aufbereiteten Daten können nun [hier](https://github.com/rstatszh-k010/projekt-Dino-Wirz/blob/master/daten/processed/daten_komplett.csv) als Textfile betrachtet werden.
+
 # Daten Visualisierung
+
+## Zustand (aktuellste Werte)
+
+Im folgenden sind die Werte aus der letzten vollständig vorliegenden Überwachungsperiode (2015-2019) für den Oberboden abgebildet und in Tabellenform zusammengefasst.
+
+```{r}
+#| layout-ncol: 2
+#| layout-valign: center
+
+filter(kabo,param_txt=="Kupfer",periode == 5) |>
+  ggplot(aes(x = AktStandorttyp,
+           y = WertOB,
+           fill = AktStandorttyp)) +
+  geom_boxplot(show.legend = F) +
+  theme_gray(base_size = 26) +
+  theme(panel.background = element_blank(),
+        panel.grid.major.y = element_line(color = "grey85"),
+        panel.grid.major.x = element_line(color = NA),
+        axis.ticks = element_blank())+
+  scale_x_discrete(name = "Standortnutzung")+
+  scale_y_continuous(name = "Gehalt [ppm]",limits = c(0,55),breaks = seq(0,55,10)) +
+  labs(title = "Kupfer")
+
+knitr::kable(kabo[1:4,1:4])
+
+filter(kabo,param_txt=="Quecksilber",periode == 5) |>
+  ggplot(aes(x = AktStandorttyp,
+           y = WertOB,
+           fill = AktStandorttyp)) +
+  geom_boxplot(show.legend = F) +
+  theme_gray(base_size = 26) +
+  theme(panel.background = element_blank(),
+        panel.grid.major.y = element_line(color = "grey85"),
+        panel.grid.major.x = element_line(color = NA),
+        axis.ticks = element_blank())+
+  scale_x_discrete(name = "Standortnutzung")+
+  scale_y_continuous(name = "Gehalt [ppm]",limits = c(0,0.25),breaks = seq(0,.25,.05)) +
+  labs(title = "Quecksilber")
+
+knitr::kable(kabo[1:4,1:4]) 
+```
