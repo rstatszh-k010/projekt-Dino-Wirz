@@ -1,0 +1,144 @@
+---
+title: "Kantonale Bodenüberwachung"
+subtitle: "Überwachungsperioden 1-6 (1995-2024)"
+format:
+  html:
+    embed-resources: false
+    toc: true
+    code-fold: true
+    code-overflow: wrap
+execute:
+  warning: false
+  echo: true
+editor_options: 
+  chunk_output_type: console
+editor: source
+---
+
+```{r}
+#| echo: false
+library(tidyverse)
+library(here)
+library(readr)
+library(lubridate)
+# library(devtools)
+# devtools::install_github("statistikZH/statR") # Kantons-CD installieren
+```
+
+```{r}
+#| echo: false
+# Rohdaten einlesen, unbearbeitet
+kabodaten_roh <- read.csv(here::here("daten/raw/kabodaten_utf8.csv"),sep=";",dec=".",encoding = "UTF-8")
+gemeinden_roh <- read.csv(here::here("daten/raw/gemeinden_utf8.csv"),sep=";",dec=".",encoding = "UTF-8")
+
+```
+
+# Einleitung
+
+Die Kantonale Bodenüberwachung (KaBo) ist ein langfristiges Monitoringprogramm der Fachstelle Bodenschutz (FaBo). Seit 1995 beproben und analysieren wir die Böden regelmässig an über 500 Standorten im Kanton Zürich. Ziel ist es, den Zustand und die Entwicklung verschiedener chemischer und physikalischer Eigenschaften des Bodens abzubilden. Die KaBo fokussiert nicht auf einzelne Standorte, sondern vermittelt ein Gesamtbild über den Kanton.
+
+## Daten
+
+Der Datensatz enthält Messdaten
+
+-   zu rund **500 Standorten**
+
+-   aus jeweils **2 Entnahmetiefen**
+
+-   von **6 Zeitpunkten**
+
+-   für die Schwermetalle **Cadmium, Chrom, Kupfer, Quecksilber, Nickel, Blei und Zink** sowie
+
+-   die Parameter **pH-Wert, Gehalt an organischer Substanz und Lagerungsdichte** des Oberbodens
+
+Die Standorte sind gegliedert nach den **Nutzungsarten Acker, Dauergrünland und Wald.**
+
+Nicht alle Parameter liegen an allen Standorten und Tiefen **lückenlos** vor. Sind Schwermetallgehalte so niedrig, dass sie unterhalb der **technischen Bestimmungsgrenze** liegen, wird ein Platzhalterwert angegeben.
+
+**Datenquelle:** Die Daten zu einzelnen Standorten lassen sich im [GIS-Browser](https://geo.ktzh.ch/maps?initialMapIds=FaBoKaBoZH) im Layer "Kantonale Bodenüberwachung" abfragen. Die Übersicht zu allen Standorten wurde von der Fachstelle Bodenschutz lokal erzeugt und ist zurzeit nicht frei verfügbar.
+
+## Analyseziele
+
+-   **Zustand:** Für jeden Parameter wird dargestellt und beschrieben, wie die Werteverteilung (Mittelwert und üblicher Bereich) zum aktuellsten Messzeitpunkt aussieht.
+
+-   **Entwicklung:** Für jeden Parameter dargestellt, wie sich der mittlere Wert über die Zeit entwickelt hat
+
+# Daten Aufbereitung
+
+```{r}
+#| code-fold: show
+#| code-overflow: wrap
+# Rohdaten aufbereiten:
+  # 1.Tabelle mit Standortinformationen
+  # unnötige Spalten entfernen
+gemeinden <- select(gemeinden_roh,StandortID,PolitGemeinde,x_200,y_200) |> 
+  # Formatierung Gemeindenamen
+  mutate(Gemeinde = str_to_title(PolitGemeinde), .keep = "unused"
+  ) |> 
+  mutate(Gemeinde = str_remove_all(Gemeinde, fixed(" (Zh)"))) |> 
+  mutate(Gemeinde = str_replace(Gemeinde, " Am Albis", " a.A.")) |> 
+  mutate(Gemeinde = str_replace(Gemeinde, " Am See", " a.S.")) |> 
+  mutate(Gemeinde = str_replace(Gemeinde, " Am Irchel", " a.I.")) |>
+  mutate(Gemeinde = str_replace(Gemeinde, " An Der Thur", " a.d.T")) |> 
+  mutate(Gemeinde = str_replace(Gemeinde, "ae", "ä")) |> 
+  mutate(Gemeinde = str_replace(Gemeinde, "oe", "ö")) |> 
+  mutate(Gemeinde = str_replace(Gemeinde, "ue", "ü")) |> 
+  mutate(Gemeinde = str_remove(Gemeinde, " Zh"))
+  # formatierte Daten als csv ablegen
+write.csv(gemeinden,here::here("daten/processed/gemeinden_formatiert.csv"))
+ # 2.Tabelle mit Messdaten
+ # unnötige Spalten entfernen
+kabodaten <- select(kabodaten_roh,
+                    StandortID,
+                    p.dat,
+                    periode,
+                    KaboStatus,
+                    AktStandorttyp,
+                    Parameter,
+                    WertOB = Wert_plot_OB,
+                    WertOB_tab = Wert_tab_OB,
+                    Klasse_OB,
+                    WertUB = Wert_plot_UB,
+                    WertUB_tab = Wert_tab_UB,
+                    Klasse_UB) |> mutate( 
+                # Datumswert von String in Datum umwandeln
+                      p.dat = dmy(p.dat)
+                    ) |> mutate(
+                # Spaltennamen und Textwerte vereinfachen
+                      AktStandorttyp = case_when(
+                        startsWith(AktStandorttyp,"Acker") ~ "Acker",
+                        .default = AktStandorttyp)
+                    ) |> mutate(
+                        param_txt = case_when(
+                          Parameter == "HGT_PPM" ~ "Quecksilber",
+                          Parameter == "CDT_PPM" ~ "Cadmium",
+                          Parameter == "CUT_PPM" ~ "Kupfer",
+                          Parameter == "PBT_PPM" ~ "Blei",
+                          Parameter == "ZNT_PPM" ~ "Zink",
+                          Parameter == "CRT_PPM" ~ "Chrom",
+                          Parameter == "NIT_PPM" ~ "Nickel",
+                          Parameter == "ORG_SUB" ~ "Organische Substanz",
+                          Parameter == "PHCA" ~ "pH",
+                          Parameter == "LAGDICHT_BURG" ~ "Lagerungsdichte",
+                          .default = NA)
+                    ) |> mutate(
+                # neue Spalte mit Masseinheit
+                        einheit = case_when(
+                          endsWith(Parameter,"PPM") ~ "ppm",
+                          Parameter == "ORG_SUB" ~ "%",
+                          Parameter == "PHCA" ~ " ",
+                          Parameter == "LAGDICHT_BURG" ~ "kg/l",
+                          .default = NA)
+                    )
+ # formatierte Tabelle als csv ablegen
+write.csv(kabodaten,here::here("daten/processed/kabodaten_formatiert.csv"))
+# 3. zusammenführen der beiden Tabellen
+ # Darstellung aufräumen
+kabo <- left_join(kabodaten,gemeinden,by="StandortID") |> 
+  select(StandortID,KaboStatus,AktStandorttyp,x_200,y_200,Gemeinde,periode,p.dat,param_txt,einheit,WertOB,WertOB_tab,Klasse_OB,WertUB,WertUB_tab,Klasse_UB)
+ # komplette, formatierte Tabelle als csv ablegen
+write.csv(kabo,here::here("daten/processed/daten_komplett.csv"))
+
+```
+
+# Daten Visualisierung

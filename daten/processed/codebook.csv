@@ -1,1 +1,17 @@
-﻿variable_name;beschreibung
+variable_name;beschreibung
+StandortID;Identifikationsnummer des Standorts
+KaboStatus;Hauptstandort oder Nebenstandort
+AktStandorttyp;Nutzungsart des Standorts: Acker, Grünland, Wald
+x_200;x-Koordinate des Standorts auf 200 Meter genau
+y_200;y-Koordinate des Standorts auf 200 Meter genau
+Gemeinde;Politische Gemeinde in der der STandort liegt
+periode;Überwachungsperiode, in welcher die Probenahme stattgefunden hat: 1 = 1995-1999, 2 = 2000-2004, 3 = 2005-2009, 4 = 2010-2014, 5 = 2015-2019, 6 = 2020-2024
+p.dat;taggenaues Probenahmedatum
+param_txt;Name Analyseparameters
+einheit;Einheit des Analyseparameters. ppm = parts per million. pH-Werte sind einheitslos
+WertOB;Messwert für den Oberboden, numerisch >=0
+WertOB_tab;Messwert für den OBerboden, als string zur Darstellung in Tabellen: Messwerte unterhalb der Bestimmungsgrenze mit kleiner-als-Zeichen
+Klasse_OB;Klassierung des Messwerts innerhalb der Beurteilungswerte. -1 = nicht anwendbar, 0 = unterhalb Richtwert, 1 = unterhalb Prüfwert, 2 = unterhalb Sanierungswert. Mit Textpräfix = keine Beurteilungswerte vorhanden, eigene Klassierung.
+Wert_UB;siehe Wert_OB, für Unterboden
+WertOB_tab;siehe WertUB_tab, für Unterboden
+Klasse_UB;siehe Klasse_OB, für Unterboden
