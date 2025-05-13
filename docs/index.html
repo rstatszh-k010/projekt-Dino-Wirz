@@ -69,6 +69,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="index_files/libs/bootstrap/bootstrap-5572027a3862cd1fa4aa08715da60d0e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="index_files/libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="index_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
 </head>
@@ -81,25 +83,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#einleitung" id="toc-einleitung" class="nav-link active" data-scroll-target="#einleitung">Einleitung</a>
+  <li><a href="#einleitung" id="toc-einleitung" class="nav-link active" data-scroll-target="#einleitung">Einleitung</a></li>
+  <li><a href="#daten" id="toc-daten" class="nav-link" data-scroll-target="#daten">Daten</a>
   <ul class="collapse">
-  <li><a href="#daten" id="toc-daten" class="nav-link" data-scroll-target="#daten">Daten</a></li>
+  <li><a href="#beschreibung" id="toc-beschreibung" class="nav-link" data-scroll-target="#beschreibung">Beschreibung</a></li>
   <li><a href="#analyseziele" id="toc-analyseziele" class="nav-link" data-scroll-target="#analyseziele">Analyseziele</a></li>
+  <li><a href="#aufbereitung" id="toc-aufbereitung" class="nav-link" data-scroll-target="#aufbereitung">Aufbereitung</a></li>
   </ul></li>
-  <li><a href="#daten-aufbereitung" id="toc-daten-aufbereitung" class="nav-link" data-scroll-target="#daten-aufbereitung">Daten Aufbereitung</a></li>
-  <li><a href="#daten-visualisierung" id="toc-daten-visualisierung" class="nav-link" data-scroll-target="#daten-visualisierung">Daten Visualisierung</a>
+  <li><a href="#ergebnisse" id="toc-ergebnisse" class="nav-link" data-scroll-target="#ergebnisse">Ergebnisse</a>
   <ul class="collapse">
-  <li><a href="#zustand-aktuellste-werte" id="toc-zustand-aktuellste-werte" class="nav-link" data-scroll-target="#zustand-aktuellste-werte">Zustand (aktuellste Werte)</a></li>
+  <li><a href="#zustand-schwermetalle" id="toc-zustand-schwermetalle" class="nav-link" data-scroll-target="#zustand-schwermetalle">Zustand Schwermetalle</a></li>
+  <li><a href="#entwicklung-kennwerte" id="toc-entwicklung-kennwerte" class="nav-link" data-scroll-target="#entwicklung-kennwerte">Entwicklung Kennwerte</a>
+  <ul class="collapse">
+  <li><a href="#organische-substanz-humusgehalt" id="toc-organische-substanz-humusgehalt" class="nav-link" data-scroll-target="#organische-substanz-humusgehalt">Organische Substanz (Humusgehalt)</a></li>
+  <li><a href="#ph-wert" id="toc-ph-wert" class="nav-link" data-scroll-target="#ph-wert">pH-Wert</a></li>
   </ul></li>
+  </ul></li>
+  <li><a href="#schlussfolgerungen" id="toc-schlussfolgerungen" class="nav-link" data-scroll-target="#schlussfolgerungen">Schlussfolgerungen</a></li>
   </ul>
 </nav>
 </div>
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Kantonale Bodenüberwachung</h1>
-<p class="subtitle lead">Überwachungsperioden 1-6 (1995-2024)</p>
+<p class="subtitle lead">Überwachungsperioden 1-5 (1995-2019)</p>
 </div>
 
 
@@ -119,30 +128,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="einleitung" class="level1">
 <h1>Einleitung</h1>
 <p>Die Kantonale Bodenüberwachung (KaBo) ist ein langfristiges Monitoringprogramm der Fachstelle Bodenschutz (FaBo). Seit 1995 beproben und analysieren wir die Böden regelmässig an über 500 Standorten im Kanton Zürich. Ziel ist es, den Zustand und die Entwicklung verschiedener chemischer und physikalischer Eigenschaften des Bodens abzubilden. Die KaBo fokussiert nicht auf einzelne Standorte, sondern vermittelt ein Gesamtbild über den Kanton.</p>
-<section id="daten" class="level2">
-<h2 class="anchored" data-anchor-id="daten">Daten</h2>
+</section>
+<section id="daten" class="level1">
+<h1>Daten</h1>
+<section id="beschreibung" class="level2">
+<h2 class="anchored" data-anchor-id="beschreibung">Beschreibung</h2>
 <p>Der Datensatz enthält Messdaten</p>
 <ul>
-<li><p>zu rund <strong>500 Standorten</strong></p></li>
-<li><p>aus jeweils <strong>2 Entnahmetiefen</strong></p></li>
-<li><p>von <strong>6 Zeitpunkten</strong></p></li>
-<li><p>für die Schwermetalle <strong>Cadmium, Chrom, Kupfer, Quecksilber, Nickel, Blei und Zink</strong> sowie</p></li>
-<li><p>die Parameter <strong>pH-Wert, Gehalt an organischer Substanz und Lagerungsdichte</strong> des Oberbodens</p></li>
+<li><p>zu rund <strong>500 Standorten</strong> mit den Nutzungsarten <strong>Acker, Grünland und Wald.</strong></p></li>
+<li><p>von <strong>5 Zeitpunkten</strong> (von Messperiode 6 ist die Beprobung abgeschlossen, die Analysen liegen noch nicht vollständig vor)</p></li>
+<li><p>für die Schwermetalle <strong>Cadmium, Chrom, Kupfer, Quecksilber</strong> sowie</p></li>
+<li><p>den Gehalt an <strong>organischer Substanz</strong> und den <strong>pH-Wert</strong></p></li>
 </ul>
-<p>Die Standorte sind gegliedert nach den <strong>Nutzungsarten Acker, Dauergrünland und Wald.</strong></p>
-<p>Nicht alle Parameter liegen an allen Standorten und Tiefen <strong>lückenlos</strong> vor. Sind Schwermetallgehalte so niedrig, dass sie unterhalb der <strong>technischen Bestimmungsgrenze</strong> liegen, wird ein Platzhalterwert angegeben.</p>
+<p>Weitere Messparameter sind in den Daten enthalten, wurden aber bisher nicht ausgewertet.</p>
+<p>Nicht alle Parameter liegen an allen Standorten und Tiefen lückenlos vor. Sind Schwermetallgehalte so niedrig, dass sie unterhalb der technischen Bestimmungsgrenze liegen, wird ein Platzhalterwert angegeben.</p>
 <p><strong>Datenquelle:</strong> Die Daten zu einzelnen Standorten lassen sich im <a href="https://geo.ktzh.ch/maps?initialMapIds=FaBoKaBoZH">GIS-Browser</a> im Layer “Kantonale Bodenüberwachung” abfragen. Die Übersicht zu allen Standorten wurde von der Fachstelle Bodenschutz lokal erzeugt und ist zurzeit nicht frei verfügbar.</p>
 </section>
 <section id="analyseziele" class="level2">
 <h2 class="anchored" data-anchor-id="analyseziele">Analyseziele</h2>
 <ul>
-<li><p><strong>Zustand:</strong> Für jeden Parameter wird dargestellt und beschrieben, wie die Werteverteilung (Mittelwert und üblicher Bereich) zum aktuellsten Messzeitpunkt aussieht.</p></li>
-<li><p><strong>Entwicklung:</strong> Für jeden Parameter dargestellt, wie sich der mittlere Wert über die Zeit entwickelt hat</p></li>
+<li><p><strong>Zustand:</strong> Für die Schwermetalle wird dargestellt und beschrieben, wie die Werteverteilung (Mittelwert und üblicher Bereich = mittlere 80 % der Werte) zum aktuellsten Messzeitpunkt aussieht.</p></li>
+<li><p><strong>Entwicklung:</strong> Für die Parameter organische Substanz sowie pH-Wert wird dargestellt, wie sich der mittlere Wert seit Beginn der Überwachung entwickelt hat</p></li>
 </ul>
 </section>
-</section>
-<section id="daten-aufbereitung" class="level1">
-<h1>Daten Aufbereitung</h1>
+<section id="aufbereitung" class="level2">
+<h2 class="anchored" data-anchor-id="aufbereitung">Aufbereitung</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -221,187 +231,589 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(kabo,here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/processed/daten_komplett.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Die aufbereiteten Daten können nun <a href="https://github.com/rstatszh-k010/projekt-Dino-Wirz/blob/master/daten/processed/daten_komplett.csv">hier</a> als Textfile betrachtet werden.</p>
+<p>Die für die Bodendatenbank der Fachstelle formatierten Rohdaten wurden in ein einfach lesbares, einheitliches Format vereinfacht und unnötige Spalten entfernt. Die aufbereiteten Daten können nun <a href="https://github.com/rstatszh-k010/projekt-Dino-Wirz/blob/master/daten/processed/daten_komplett.csv">hier</a> als Textfile betrachtet werden.</p>
 </section>
-<section id="daten-visualisierung" class="level1">
-<h1>Daten Visualisierung</h1>
-<section id="zustand-aktuellste-werte" class="level2">
-<h2 class="anchored" data-anchor-id="zustand-aktuellste-werte">Zustand (aktuellste Werte)</h2>
-<p>Im folgenden sind die Werte aus der letzten vollständig vorliegenden Überwachungsperiode (2015-2019) für den Oberboden abgebildet und in Tabellenform zusammengefasst.</p>
+</section>
+<section id="ergebnisse" class="level1 page-columns page-full">
+<h1>Ergebnisse</h1>
+<section id="zustand-schwermetalle" class="level2">
+<h2 class="anchored" data-anchor-id="zustand-schwermetalle">Zustand Schwermetalle</h2>
+<p>Im folgenden sind die Messwerte für den Oberboden der Schwermetalle Cadmium (<a href="#fig-cadmium" class="quarto-xref">Abb.&nbsp;1</a>), Chrom (<a href="#fig-chrom" class="quarto-xref">Abb.&nbsp;2</a>), Kupfer (<a href="#fig-kupfer" class="quarto-xref">Abb.&nbsp;3</a>) und Quecksilber (<a href="#fig-quecksilber" class="quarto-xref">Abb.&nbsp;4</a>) aus der letzten vollständig vorliegenden Überwachungsperiode (2015-2019) abgebildet und der auf den KaBo-Standorten gefundene übliche Wertebereich tabellarisch zusammengefasst (<a href="#tbl-cadmium" class="quarto-xref">Tab.&nbsp;1</a> für Cadmium, <a href="#tbl-chrom" class="quarto-xref">Tab.&nbsp;2</a> für Chrom, <a href="#tbl-kupfer" class="quarto-xref">Tab.&nbsp;3</a> für Kupfer und <a href="#tbl-quecksilber" class="quarto-xref">Tab.&nbsp;4</a> für Quecksilber.</p>
+<p>Die gelbe Linie “RW” steht für die Höhe des Richtwerts nach Verordnung über Belastungen des Bodens (VBBo). Vereinzelt liegen Extremwerte ausserhalb des abgebildeten Bereichs vor.</p>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(kabo,param_txt<span class="sc">==</span><span class="st">"Kupfer"</span>,periode <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(kabo,param_txt<span class="sc">==</span><span class="st">"Cadmium"</span>,periode <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> AktStandorttyp,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> WertOB,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> AktStandorttyp)) <span class="sc">+</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">26</span>) <span class="sc">+</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey85"</span>),</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>())<span class="sc">+</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Standortnutzung"</span>)<span class="sc">+</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Gehalt [ppm]"</span>,<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">55</span>),<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">55</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Kupfer"</span>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(kabo[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(kabo,param_txt<span class="sc">==</span><span class="st">"Quecksilber"</span>,periode <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> AktStandorttyp,</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> WertOB,</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> AktStandorttyp)) <span class="sc">+</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">26</span>) <span class="sc">+</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey85"</span>),</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>())<span class="sc">+</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Standortnutzung"</span>)<span class="sc">+</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Gehalt [ppm]"</span>,<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.25</span>),<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,.<span class="dv">25</span>,.<span class="dv">05</span>)) <span class="sc">+</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Quecksilber"</span>)</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(kabo[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> AktStandorttyp))<span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.8</span>, <span class="at">color =</span> <span class="st">"gold"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">label =</span> <span class="st">"RW"</span>, <span class="at">x=</span> <span class="cn">Inf</span>, <span class="at">hjust=</span> <span class="dv">1</span>, <span class="at">y=</span><span class="fl">0.775</span>,<span class="at">color =</span> <span class="st">"gold"</span>, <span class="at">size =</span> <span class="dv">16</span><span class="sc">/</span>.pt) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span>farben)<span class="sc">+</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey85"</span>),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>())<span class="sc">+</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Gehalt [ppm]"</span>,<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">8</span>),<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,.<span class="dv">8</span>,.<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cadmium"</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(kabo,param_txt<span class="sc">==</span><span class="st">"Cadmium"</span>,periode <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(AktStandorttyp) <span class="sc">|&gt;</span> </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">untquant =</span> <span class="fu">round</span>(<span class="fu">quantile</span>(WertOB,.<span class="dv">1</span>),<span class="dv">2</span>),</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">Median =</span> <span class="fu">round</span>(<span class="fu">median</span>(WertOB),<span class="dv">2</span>),</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">obquant =</span> <span class="fu">round</span>(<span class="fu">quantile</span>(WertOB,.<span class="dv">9</span>),<span class="dv">2</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"Anz."</span>, <span class="st">"tief"</span>, <span class="st">"Median"</span>, <span class="st">"hoch"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">4</span>, <span class="at">bold=</span>T)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(kabo,param_txt<span class="sc">==</span><span class="st">"Chrom"</span>,periode <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> AktStandorttyp,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> WertOB,</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> AktStandorttyp)) <span class="sc">+</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">50</span>, <span class="at">color =</span> <span class="st">"gold"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">label =</span> <span class="st">"RW"</span>, <span class="at">x=</span> <span class="cn">Inf</span>, <span class="at">hjust=</span> <span class="dv">1</span>, <span class="at">y=</span><span class="fl">47.5</span>,<span class="at">color =</span> <span class="st">"gold"</span>, <span class="at">size =</span> <span class="dv">16</span><span class="sc">/</span>.pt) <span class="sc">+</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span>farben) <span class="sc">+</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey85"</span>),</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>())<span class="sc">+</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Gehalt [ppm]"</span>,<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">70</span>),<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">70</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Chrom"</span>)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(kabo,param_txt<span class="sc">==</span><span class="st">"Chrom"</span>,periode <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(AktStandorttyp) <span class="sc">|&gt;</span> </span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>            <span class="at">untquant =</span> <span class="fu">round</span>(<span class="fu">quantile</span>(WertOB,.<span class="dv">1</span>),<span class="dv">1</span>),</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>            <span class="at">Median =</span> <span class="fu">round</span>(<span class="fu">median</span>(WertOB),<span class="dv">1</span>),</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>            <span class="at">obquant =</span> <span class="fu">round</span>(<span class="fu">quantile</span>(WertOB,.<span class="dv">9</span>),<span class="dv">1</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"Anz."</span>, <span class="st">"tief"</span>, <span class="st">"Median"</span>, <span class="st">"hoch"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">4</span>, <span class="at">bold=</span>T)</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(kabo,param_txt<span class="sc">==</span><span class="st">"Kupfer"</span>,periode <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> AktStandorttyp,</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> WertOB,</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> AktStandorttyp))<span class="sc">+</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">40</span>, <span class="at">color =</span> <span class="st">"gold"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">label =</span> <span class="st">"RW"</span>, <span class="at">x=</span> <span class="cn">Inf</span>, <span class="at">hjust=</span> <span class="dv">1</span>, <span class="at">y=</span><span class="fl">37.5</span>,<span class="at">color =</span> <span class="st">"gold"</span>, <span class="at">size =</span> <span class="dv">16</span><span class="sc">/</span>.pt) <span class="sc">+</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span>farben) <span class="sc">+</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey85"</span>),</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>())<span class="sc">+</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Gehalt [ppm]"</span>,<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>),<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">50</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Kupfer"</span>)</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(kabo,param_txt<span class="sc">==</span><span class="st">"Kupfer"</span>,periode <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(AktStandorttyp) <span class="sc">|&gt;</span> </span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>            <span class="at">untquant =</span> <span class="fu">round</span>(<span class="fu">quantile</span>(WertOB,.<span class="dv">1</span>),<span class="dv">1</span>),</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>            <span class="at">Median =</span> <span class="fu">round</span>(<span class="fu">median</span>(WertOB),<span class="dv">1</span>),</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>            <span class="at">obquant =</span> <span class="fu">round</span>(<span class="fu">quantile</span>(WertOB,.<span class="dv">9</span>),<span class="dv">1</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"Anz."</span>, <span class="st">"tief"</span>, <span class="st">"Median"</span>, <span class="st">"hoch"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">4</span>, <span class="at">bold=</span>T)</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(kabo,param_txt<span class="sc">==</span><span class="st">"Quecksilber"</span>,periode <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> AktStandorttyp,</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> WertOB,</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> AktStandorttyp))<span class="sc">+</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">label =</span> <span class="st">"RW = 0.5 ppm"</span>, <span class="at">x=</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">hjust=</span> <span class="dv">0</span>, <span class="at">y=</span>.<span class="dv">27</span>,<span class="at">color =</span> <span class="st">"gold"</span>, <span class="at">size =</span> <span class="dv">18</span><span class="sc">/</span>.pt) <span class="sc">+</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span>farben) <span class="sc">+</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey85"</span>),</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>())<span class="sc">+</span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Gehalt [ppm]"</span>,<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">27</span>),<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,.<span class="dv">250</span>,.<span class="dv">050</span>)) <span class="sc">+</span></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Quecksilber"</span>)</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(kabo,param_txt<span class="sc">==</span><span class="st">"Quecksilber"</span>,periode <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(AktStandorttyp) <span class="sc">|&gt;</span> </span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>            <span class="at">untquant =</span> <span class="fu">round</span>(<span class="fu">quantile</span>(WertOB,.<span class="dv">1</span>),<span class="dv">2</span>),</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>            <span class="at">Median =</span> <span class="fu">round</span>(<span class="fu">median</span>(WertOB),<span class="dv">2</span>),</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>            <span class="at">obquant =</span> <span class="fu">round</span>(<span class="fu">quantile</span>(WertOB,.<span class="dv">9</span>),<span class="dv">2</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"Anz."</span>, <span class="st">"tief"</span>, <span class="st">"Median"</span>, <span class="st">"hoch"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">4</span>, <span class="at">bold=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row quarto-layout-valign-center">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-layout-panel" data-layout="[[55,45]]">
+<div class="quarto-layout-row">
+<div class="cell quarto-layout-cell" style="flex-basis: 55.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div id="fig-cadmium" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cadmium-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-cadmium-1.png" class="img-fluid figure-img" width="672">
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<table class="caption-top table table-sm table-striped small">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cadmium-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abb.&nbsp;1: Verteilung der Cadmium-Gehalte in Oberböden unterschiedlicher Nutzung
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell quarto-layout-cell" data-layout-valign="bottom" style="flex-basis: 45.0%;justify-content: center;">
+<div id="tbl-cadmium" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-valign="bottom">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-cadmium-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tab.&nbsp;1: Üblicher Wertebereich für Cadmiumgehalte in Oberböden [ppm]. tief und hoch bezeichnen das 10. und 90. Quantil der Werte
+</figcaption>
+<div aria-describedby="tbl-cadmium-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th style="text-align: right;">StandortID</th>
-<th style="text-align: left;">KaboStatus</th>
-<th style="text-align: left;">AktStandorttyp</th>
-<th style="text-align: right;">x_200</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Anz.</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">tief</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Median</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hoch</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">16219</td>
-<td style="text-align: left;">NS</td>
 <td style="text-align: left;">Acker</td>
-<td style="text-align: right;">2701400</td>
+<td style="text-align: right;">226</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right; font-weight: bold;">0.27</td>
+<td style="text-align: right;">0.38</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">1631</td>
-<td style="text-align: left;">NS</td>
-<td style="text-align: left;">Acker</td>
-<td style="text-align: right;">2705000</td>
+<td style="text-align: left;">Grünland</td>
+<td style="text-align: right;">103</td>
+<td style="text-align: right;">0.21</td>
+<td style="text-align: right; font-weight: bold;">0.32</td>
+<td style="text-align: right;">0.50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wald</td>
+<td style="text-align: right;">179</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: right; font-weight: bold;">0.15</td>
+<td style="text-align: right;">0.31</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-center">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="index_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
+</figure>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<table class="caption-top table table-sm table-striped small">
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell quarto-layout-cell" style="flex-basis: 55.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div id="fig-chrom" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-chrom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-chrom-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-chrom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abb.&nbsp;2: Verteilung der Chrom-Gehalte in Oberböden unterschiedlicher Nutzung
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 45.0%;justify-content: center;">
+<div id="tbl-chrom" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-chrom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tab.&nbsp;2: Üblicher Wertebereich für Chromgehalte in Oberböden [ppm]. tief und hoch bezeichnen das 10. und 90. Quantil der Werte
+</figcaption>
+<div aria-describedby="tbl-chrom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th style="text-align: right;">StandortID</th>
-<th style="text-align: left;">KaboStatus</th>
-<th style="text-align: left;">AktStandorttyp</th>
-<th style="text-align: right;">x_200</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Anz.</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">tief</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Median</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hoch</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">16219</td>
-<td style="text-align: left;">NS</td>
 <td style="text-align: left;">Acker</td>
-<td style="text-align: right;">2701400</td>
+<td style="text-align: right;">226</td>
+<td style="text-align: right;">18.4</td>
+<td style="text-align: right; font-weight: bold;">26.6</td>
+<td style="text-align: right;">39.2</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">1631</td>
-<td style="text-align: left;">NS</td>
-<td style="text-align: left;">Acker</td>
-<td style="text-align: right;">2705000</td>
+<td style="text-align: left;">Grünland</td>
+<td style="text-align: right;">103</td>
+<td style="text-align: right;">22.3</td>
+<td style="text-align: right; font-weight: bold;">30.6</td>
+<td style="text-align: right;">43.4</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">1631</td>
-<td style="text-align: left;">NS</td>
-<td style="text-align: left;">Acker</td>
-<td style="text-align: right;">2705000</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1631</td>
-<td style="text-align: left;">NS</td>
-<td style="text-align: left;">Acker</td>
-<td style="text-align: right;">2705000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">1631</td>
-<td style="text-align: left;">NS</td>
-<td style="text-align: left;">Acker</td>
-<td style="text-align: right;">2705000</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1631</td>
-<td style="text-align: left;">NS</td>
-<td style="text-align: left;">Acker</td>
-<td style="text-align: right;">2705000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">6398</td>
-<td style="text-align: left;">NS</td>
 <td style="text-align: left;">Wald</td>
-<td style="text-align: right;">2697400</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">6398</td>
-<td style="text-align: left;">NS</td>
-<td style="text-align: left;">Wald</td>
-<td style="text-align: right;">2697400</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">6398</td>
-<td style="text-align: left;">NS</td>
-<td style="text-align: left;">Wald</td>
-<td style="text-align: right;">2697400</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">6398</td>
-<td style="text-align: left;">NS</td>
-<td style="text-align: left;">Wald</td>
-<td style="text-align: right;">2697400</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">6398</td>
-<td style="text-align: left;">NS</td>
-<td style="text-align: left;">Wald</td>
-<td style="text-align: right;">2697400</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">6398</td>
-<td style="text-align: left;">NS</td>
-<td style="text-align: left;">Wald</td>
-<td style="text-align: right;">2697400</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">6399</td>
-<td style="text-align: left;">NS</td>
-<td style="text-align: left;">Wald</td>
-<td style="text-align: right;">2694200</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">6399</td>
-<td style="text-align: left;">NS</td>
-<td style="text-align: left;">Wald</td>
-<td style="text-align: right;">2694200</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">6399</td>
-<td style="text-align: left;">NS</td>
-<td style="text-align: left;">Wald</td>
-<td style="text-align: right;">2694200</td>
+<td style="text-align: right;">179</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right; font-weight: bold;">22.9</td>
+<td style="text-align: right;">30.0</td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell quarto-layout-cell" style="flex-basis: 55.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div id="fig-kupfer" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-kupfer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-kupfer-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kupfer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abb.&nbsp;3: Verteilung der Kupfer-Gehalte in Oberböden unterschiedlicher Nutzung
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 45.0%;justify-content: center;">
+<div id="tbl-kupfer" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-kupfer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tab.&nbsp;3: Üblicher Wertebereich für Kupfergehalte in Oberböden [ppm]. tief und hoch bezeichnen das 10. und 90. Quantil der Werte
+</figcaption>
+<div aria-describedby="tbl-kupfer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Anz.</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">tief</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Median</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hoch</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Acker</td>
+<td style="text-align: right;">226</td>
+<td style="text-align: right;">14.3</td>
+<td style="text-align: right; font-weight: bold;">19.7</td>
+<td style="text-align: right;">30.1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Grünland</td>
+<td style="text-align: right;">103</td>
+<td style="text-align: right;">12.2</td>
+<td style="text-align: right; font-weight: bold;">17.8</td>
+<td style="text-align: right;">25.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wald</td>
+<td style="text-align: right;">179</td>
+<td style="text-align: right;">5.6</td>
+<td style="text-align: right; font-weight: bold;">8.9</td>
+<td style="text-align: right;">14.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell quarto-layout-cell" style="flex-basis: 55.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div id="fig-quecksilber" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quecksilber-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-quecksilber-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quecksilber-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abb.&nbsp;4: Verteilung der Quecksilber-Gehalte in Oberböden unterschiedlicher Nutzung
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 45.0%;justify-content: center;">
+<div id="tbl-quecksilber" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-quecksilber-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tab.&nbsp;4: Üblicher Wertebereich für Quecksilbergehalte in Oberböden [ppm]. tief und hoch bezeichnen das 10. und 90. Quantil der Werte
+</figcaption>
+<div aria-describedby="tbl-quecksilber-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Anz.</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">tief</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Median</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hoch</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Acker</td>
+<td style="text-align: right;">226</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right; font-weight: bold;">0.05</td>
+<td style="text-align: right;">0.08</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Grünland</td>
+<td style="text-align: right;">103</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right; font-weight: bold;">0.07</td>
+<td style="text-align: right;">0.12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wald</td>
+<td style="text-align: right;">179</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right; font-weight: bold;">0.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
 </div>
 </div>
 </div>
 </section>
+<section id="entwicklung-kennwerte" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="entwicklung-kennwerte">Entwicklung Kennwerte</h2>
+<p>Ein wichtiges Ziel der Dauerüberwachung ist das Erkennen von möglichen Veränderungen im Boden. Anhand der Kennwerte organische Substanz (“Humusgehalt”, <a href="#fig-orgsub" class="quarto-xref">Abb.&nbsp;5</a>) und pH-Wert (<a href="#fig-ph" class="quarto-xref">Abb.&nbsp;6</a>) wird der Verlauf der Messwerte seit Aufnahme der Dauerüberwachung dargestellt. Da Prozesse in Böden oft stetig und langsam ablaufen, sind Veränderungen oft erst nach langer Zeit sicher festzustellen. Umso wichtiger ist ein langfristiges und standardisiertes Messnetz.</p>
+<section id="organische-substanz-humusgehalt" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="organische-substanz-humusgehalt">Organische Substanz (Humusgehalt)</h3>
+<div class="page-columns page-full">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>summ_orgsub <span class="ot">&lt;-</span> <span class="fu">filter</span>(kabo,param_txt<span class="sc">==</span><span class="st">"Organische Substanz"</span>, <span class="sc">!</span><span class="fu">is.na</span>(WertOB)) <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(periode, AktStandorttyp) <span class="sc">|&gt;</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Med =</span> <span class="fu">median</span>(WertOB),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Unten =</span> <span class="fu">quantile</span>(WertOB,.<span class="dv">1</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Oben =</span> <span class="fu">quantile</span>(WertOB, .<span class="dv">9</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">anz =</span> <span class="fu">n</span>())</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>summ_orgsub <span class="sc">|&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(AktStandorttyp<span class="sc">==</span><span class="st">"Acker"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> periode,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> Med)) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Unten, <span class="at">ymax =</span> Oben), <span class="at">fill =</span> farben[<span class="dv">1</span>], <span class="at">alpha =</span> .<span class="dv">4</span>, <span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> farben[<span class="dv">1</span>], <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey90"</span>),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="fl">1.2</span>)) <span class="sc">+</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Gehalt [%]"</span>,<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="fl">7.5</span>),<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2</span>,<span class="fl">7.5</span>,.<span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Messperiode"</span>, <span class="at">limits =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),<span class="at">breaks =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="at">labels=</span>messperioden)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>summ_orgsub <span class="sc">|&gt;</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(AktStandorttyp<span class="sc">==</span><span class="st">"Grünland"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> periode,</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> Med)) <span class="sc">+</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Unten, <span class="at">ymax =</span> Oben), <span class="at">fill =</span> farben[<span class="dv">2</span>], <span class="at">alpha =</span> .<span class="dv">4</span>, <span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> farben[<span class="dv">2</span>], <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey90"</span>),</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="fl">1.2</span>)) <span class="sc">+</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Gehalt [%]"</span>,<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">3.5</span>,<span class="fl">9.5</span>),<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">3.5</span>,<span class="fl">9.5</span>,.<span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Messperiode"</span>, <span class="at">limits =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),<span class="at">breaks =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="at">labels=</span>messperioden)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>summ_orgsub <span class="sc">|&gt;</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(AktStandorttyp<span class="sc">==</span><span class="st">"Wald"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> periode,</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> Med)) <span class="sc">+</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Unten, <span class="at">ymax =</span> Oben), <span class="at">fill =</span> farben[<span class="dv">3</span>], <span class="at">alpha =</span> .<span class="dv">4</span>, <span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> farben[<span class="dv">3</span>], <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey90"</span>),</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="fl">1.2</span>)) <span class="sc">+</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Gehalt [%]"</span>,<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">10</span>),<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">3</span>,<span class="dv">10</span>,<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Messperiode"</span>, <span class="at">limits =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),<span class="at">breaks =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="at">labels=</span>messperioden)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-orgsub" class="quarto-layout-panel page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-orgsub-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<div class="quarto-layout-row column-page">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-orgsub" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-orgsub-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-orgsub-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-orgsub-1.png" class="img-fluid figure-img" data-ref-parent="fig-orgsub" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-orgsub-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Acker
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-orgsub" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-orgsub-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-orgsub-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-orgsub-2.png" class="img-fluid figure-img" data-ref-parent="fig-orgsub" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-orgsub-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Grünland
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-orgsub" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-orgsub-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-orgsub-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-orgsub-3.png" class="img-fluid figure-img" data-ref-parent="fig-orgsub" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-orgsub-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Wald
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-orgsub-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abb.&nbsp;5: Entwicklung der Humusgehalte in Oberböden unterschiedlicher Nutzung
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="ph-wert" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="ph-wert">pH-Wert</h3>
+<div class="page-columns page-full">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>summ_ph <span class="ot">&lt;-</span> <span class="fu">filter</span>(kabo,param_txt<span class="sc">==</span><span class="st">"pH"</span>, <span class="sc">!</span><span class="fu">is.na</span>(WertOB)) <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(periode, AktStandorttyp) <span class="sc">|&gt;</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Med =</span> <span class="fu">median</span>(WertOB),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Unten =</span> <span class="fu">quantile</span>(WertOB,.<span class="dv">1</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Oben =</span> <span class="fu">quantile</span>(WertOB, .<span class="dv">9</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">anz =</span> <span class="fu">n</span>())</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>summ_ph <span class="sc">|&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(AktStandorttyp<span class="sc">==</span><span class="st">"Acker"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> periode,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> Med)) <span class="sc">+</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Unten, <span class="at">ymax =</span> Oben), <span class="at">fill =</span> farben[<span class="dv">1</span>], <span class="at">alpha =</span> .<span class="dv">4</span>, <span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> farben[<span class="dv">1</span>], <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey90"</span>),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="fl">1.2</span>)) <span class="sc">+</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"pH-Wert"</span>,<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="fl">7.5</span>),<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>,<span class="fl">7.5</span>,.<span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Messperiode"</span>, <span class="at">limits =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),<span class="at">breaks =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="at">labels=</span>messperioden)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>summ_ph <span class="sc">|&gt;</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(AktStandorttyp<span class="sc">==</span><span class="st">"Grünland"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> periode,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> Med)) <span class="sc">+</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Unten, <span class="at">ymax =</span> Oben), <span class="at">fill =</span> farben[<span class="dv">2</span>], <span class="at">alpha =</span> .<span class="dv">4</span>, <span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> farben[<span class="dv">2</span>], <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey90"</span>),</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="fl">1.2</span>)) <span class="sc">+</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"pH-Wert"</span>,<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">4.5</span>,<span class="dv">7</span>),<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">4.5</span>,<span class="dv">7</span>,.<span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Messperiode"</span>, <span class="at">limits =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),<span class="at">breaks =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="at">labels=</span>messperioden)</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>summ_ph <span class="sc">|&gt;</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(AktStandorttyp<span class="sc">==</span><span class="st">"Wald"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> periode,</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> Med)) <span class="sc">+</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Unten, <span class="at">ymax =</span> Oben), <span class="at">fill =</span> farben[<span class="dv">3</span>], <span class="at">alpha =</span> .<span class="dv">4</span>, <span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> farben[<span class="dv">3</span>], <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">22</span>) <span class="sc">+</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey90"</span>),</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="fl">1.2</span>)) <span class="sc">+</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"pH-Wert"</span>,<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">3.5</span>,<span class="dv">6</span>),<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">3.5</span>,<span class="dv">6</span>,.<span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Messperiode"</span>, <span class="at">limits =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),<span class="at">breaks =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="at">labels=</span>messperioden)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-ph" class="quarto-layout-panel page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-ph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<div class="quarto-layout-row column-page">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-ph" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-ph-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ph-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-ph-1.png" class="img-fluid figure-img" data-ref-parent="fig-ph" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ph-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Acker
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-ph" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-ph-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ph-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-ph-2.png" class="img-fluid figure-img" data-ref-parent="fig-ph" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ph-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Grünland
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-ph" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-ph-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ph-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-ph-3.png" class="img-fluid figure-img" data-ref-parent="fig-ph" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ph-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Wald
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abb.&nbsp;6: Entwicklung des pH-Werts in Oberböden unterschiedlicher Nutzung
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="schlussfolgerungen" class="level1">
+<h1>Schlussfolgerungen</h1>
 </section>
 
 </main>

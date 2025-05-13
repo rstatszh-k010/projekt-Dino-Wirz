@@ -1,6 +1,6 @@
 ---
 title: "Kantonale Bodenüberwachung"
-subtitle: "Überwachungsperioden 1-6 (1995-2024)"
+subtitle: "Überwachungsperioden 1-5 (1995-2019)"
 format:
   html:
     embed-resources: false
@@ -13,6 +13,11 @@ execute:
 editor_options: 
   chunk_output_type: console
 editor: source
+crossref:
+  fig-title: Abb.
+  fig-prefix: Abb.
+  tbl-title: Tab.
+  tbl-prefix: Tab.
 ---
 
 ```{r}
@@ -21,6 +26,8 @@ library(tidyverse)
 library(here)
 library(readr)
 library(lubridate)
+library(knitr)
+library(kableExtra)
 #library(devtools)
 #devtools::install_github("statistikZH/statR") # Kantons-CD installieren
 #library(statR)
@@ -31,40 +38,42 @@ library(lubridate)
 # Rohdaten einlesen, unbearbeitet
 kabodaten_roh <- read.csv(here::here("daten/raw/kabodaten_utf8.csv"),sep=";",dec=".",encoding = "UTF-8")
 gemeinden_roh <- read.csv(here::here("daten/raw/gemeinden_utf8.csv"),sep=";",dec=".",encoding = "UTF-8")
-
+# Farbpalette definieren
+farben <- c("sienna4", "yellow3", "forestgreen")
+messperioden <- c("1995...99", "2000...04", "2005...09", "2010...14", "2015...19", "2020...24")
 ```
 
 # Einleitung
 
 Die Kantonale Bodenüberwachung (KaBo) ist ein langfristiges Monitoringprogramm der Fachstelle Bodenschutz (FaBo). Seit 1995 beproben und analysieren wir die Böden regelmässig an über 500 Standorten im Kanton Zürich. Ziel ist es, den Zustand und die Entwicklung verschiedener chemischer und physikalischer Eigenschaften des Bodens abzubilden. Die KaBo fokussiert nicht auf einzelne Standorte, sondern vermittelt ein Gesamtbild über den Kanton.
 
-## Daten
+# Daten
+
+## Beschreibung
 
 Der Datensatz enthält Messdaten
 
--   zu rund **500 Standorten**
+-   zu rund **500 Standorten** mit den Nutzungsarten **Acker, Grünland und Wald.**
 
--   aus jeweils **2 Entnahmetiefen**
+-   von **5 Zeitpunkten** (von Messperiode 6 ist die Beprobung abgeschlossen, die Analysen liegen noch nicht vollständig vor)
 
--   von **6 Zeitpunkten**
+-   für die Schwermetalle **Cadmium, Chrom, Kupfer, Quecksilber** sowie
 
--   für die Schwermetalle **Cadmium, Chrom, Kupfer, Quecksilber, Nickel, Blei und Zink** sowie
+-   den Gehalt an **organischer Substanz** und den **pH-Wert**
 
--   die Parameter **pH-Wert, Gehalt an organischer Substanz und Lagerungsdichte** des Oberbodens
+Weitere Messparameter sind in den Daten enthalten, wurden aber bisher nicht ausgewertet.
 
-Die Standorte sind gegliedert nach den **Nutzungsarten Acker, Dauergrünland und Wald.**
-
-Nicht alle Parameter liegen an allen Standorten und Tiefen **lückenlos** vor. Sind Schwermetallgehalte so niedrig, dass sie unterhalb der **technischen Bestimmungsgrenze** liegen, wird ein Platzhalterwert angegeben.
+Nicht alle Parameter liegen an allen Standorten und Tiefen lückenlos vor. Sind Schwermetallgehalte so niedrig, dass sie unterhalb der technischen Bestimmungsgrenze liegen, wird ein Platzhalterwert angegeben.
 
 **Datenquelle:** Die Daten zu einzelnen Standorten lassen sich im [GIS-Browser](https://geo.ktzh.ch/maps?initialMapIds=FaBoKaBoZH) im Layer "Kantonale Bodenüberwachung" abfragen. Die Übersicht zu allen Standorten wurde von der Fachstelle Bodenschutz lokal erzeugt und ist zurzeit nicht frei verfügbar.
 
 ## Analyseziele
 
--   **Zustand:** Für jeden Parameter wird dargestellt und beschrieben, wie die Werteverteilung (Mittelwert und üblicher Bereich) zum aktuellsten Messzeitpunkt aussieht.
+-   **Zustand:** Für die Schwermetalle wird dargestellt und beschrieben, wie die Werteverteilung (Mittelwert und üblicher Bereich = mittlere 80 % der Werte) zum aktuellsten Messzeitpunkt aussieht.
 
--   **Entwicklung:** Für jeden Parameter dargestellt, wie sich der mittlere Wert über die Zeit entwickelt hat
+-   **Entwicklung:** Für die Parameter organische Substanz sowie pH-Wert wird dargestellt, wie sich der mittlere Wert seit Beginn der Überwachung entwickelt hat
 
-# Daten Aufbereitung
+## Aufbereitung
 
 ```{r}
 # #| code-fold: show
@@ -143,47 +152,306 @@ write_csv(kabo,here::here("daten/processed/daten_komplett.csv"))
 
 ```
 
-Die aufbereiteten Daten können nun [hier](https://github.com/rstatszh-k010/projekt-Dino-Wirz/blob/master/daten/processed/daten_komplett.csv) als Textfile betrachtet werden.
+Die für die Bodendatenbank der Fachstelle formatierten Rohdaten wurden in ein einfach lesbares, einheitliches Format vereinfacht und unnötige Spalten entfernt. Die aufbereiteten Daten können nun [hier](https://github.com/rstatszh-k010/projekt-Dino-Wirz/blob/master/daten/processed/daten_komplett.csv) als Textfile betrachtet werden.
 
-# Daten Visualisierung
+# Ergebnisse
 
-## Zustand (aktuellste Werte)
+## Zustand Schwermetalle
 
-Im folgenden sind die Werte aus der letzten vollständig vorliegenden Überwachungsperiode (2015-2019) für den Oberboden abgebildet und in Tabellenform zusammengefasst.
+Im folgenden sind die Messwerte für den Oberboden der Schwermetalle Cadmium (@fig-cadmium), Chrom (@fig-chrom), Kupfer (@fig-kupfer) und Quecksilber (@fig-quecksilber) aus der letzten vollständig vorliegenden Überwachungsperiode (2015-2019) abgebildet und der auf den KaBo-Standorten gefundene übliche Wertebereich tabellarisch zusammengefasst (@tbl-cadmium für Cadmium, @tbl-chrom für Chrom, @tbl-kupfer für Kupfer und @tbl-quecksilber für Quecksilber.
+
+Die gelbe Linie "RW" steht für die Höhe des Richtwerts nach Verordnung über Belastungen des Bodens (VBBo). Vereinzelt liegen Extremwerte ausserhalb des abgebildeten Bereichs vor.
+
+::: {layout="[[55,45]]"}
+```{r}
+#| label: fig-cadmium
+#| fig-cap: "Verteilung der Cadmium-Gehalte in Oberböden unterschiedlicher Nutzung"
+filter(kabo,param_txt=="Cadmium",periode == 5) |>
+  ggplot(aes(x = AktStandorttyp,
+           y = WertOB,
+           fill = AktStandorttyp))+
+  geom_hline(yintercept = 0.8, color = "gold", linewidth = 1) +
+  geom_text(label = "RW", x= Inf, hjust= 1, y=0.775,color = "gold", size = 16/.pt) +
+  geom_boxplot(show.legend = F) +
+  scale_fill_manual(values=farben)+
+  theme_gray(base_size = 22) +
+  theme(panel.background = element_blank(),
+        panel.grid.major.y = element_line(color = "grey85"),
+        panel.grid.major.x = element_line(color = NA),
+        axis.ticks = element_blank())+
+  scale_x_discrete(name = NULL) +
+  scale_y_continuous(name = "Gehalt [ppm]",limits = c(0,.8),breaks = seq(0,.8,.1)) +
+  labs(title = "Cadmium")
+```
 
 ```{r}
-#| layout-ncol: 2
-#| layout-valign: center
+#| label: tbl-cadmium
+#| tbl-cap: "Üblicher Wertebereich für Cadmiumgehalte in Oberböden [ppm]. tief und hoch bezeichnen das 10. und 90. Quantil der Werte"
+#| layout-valign: bottom
+filter(kabo,param_txt=="Cadmium",periode == 5) |> 
+  group_by(AktStandorttyp) |> 
+  summarise(n = n(),
+            untquant = round(quantile(WertOB,.1),2),
+            Median = round(median(WertOB),2),
+            obquant = round(quantile(WertOB,.9),2)) |> 
+  knitr::kable(col.names = c("", "Anz.", "tief", "Median", "hoch")) |> 
+  column_spec(4, bold=T)
+```
 
+```{r}
+#| label: fig-chrom
+#| fig-cap: "Verteilung der Chrom-Gehalte in Oberböden unterschiedlicher Nutzung"
+filter(kabo,param_txt=="Chrom",periode == 5) |>
+  ggplot(aes(x = AktStandorttyp,
+           y = WertOB,
+           fill = AktStandorttyp)) +
+  geom_hline(yintercept = 50, color = "gold", linewidth = 1) +
+  geom_text(label = "RW", x= Inf, hjust= 1, y=47.5,color = "gold", size = 16/.pt) +
+  geom_boxplot(show.legend = F) +
+  scale_fill_manual(values=farben) +
+  theme_gray(base_size = 22) +
+  theme(panel.background = element_blank(),
+        panel.grid.major.y = element_line(color = "grey85"),
+        panel.grid.major.x = element_line(color = NA),
+        axis.ticks = element_blank())+
+  scale_x_discrete(name = NULL) +
+  scale_y_continuous(name = "Gehalt [ppm]",limits = c(0,70),breaks = seq(0,70,10)) +
+  labs(title = "Chrom")
+```
+
+```{r}
+#| label: tbl-chrom
+#| tbl-cap: "Üblicher Wertebereich für Chromgehalte in Oberböden [ppm]. tief und hoch bezeichnen das 10. und 90. Quantil der Werte"
+filter(kabo,param_txt=="Chrom",periode == 5) |> 
+  group_by(AktStandorttyp) |> 
+  summarise(n = n(),
+            untquant = round(quantile(WertOB,.1),1),
+            Median = round(median(WertOB),1),
+            obquant = round(quantile(WertOB,.9),1)) |> 
+  knitr::kable(col.names = c("", "Anz.", "tief", "Median", "hoch")) |> 
+  column_spec(4, bold=T)
+```
+
+```{r}
+#| label: fig-kupfer
+#| fig-cap: "Verteilung der Kupfer-Gehalte in Oberböden unterschiedlicher Nutzung"
 filter(kabo,param_txt=="Kupfer",periode == 5) |>
   ggplot(aes(x = AktStandorttyp,
            y = WertOB,
-           fill = AktStandorttyp)) +
+           fill = AktStandorttyp))+
+  geom_hline(yintercept = 40, color = "gold", linewidth = 1) +
+  geom_text(label = "RW", x= Inf, hjust= 1, y=37.5,color = "gold", size = 16/.pt) +
   geom_boxplot(show.legend = F) +
-  theme_gray(base_size = 26) +
+  scale_fill_manual(values=farben) +
+  theme_gray(base_size = 22) +
   theme(panel.background = element_blank(),
         panel.grid.major.y = element_line(color = "grey85"),
         panel.grid.major.x = element_line(color = NA),
         axis.ticks = element_blank())+
-  scale_x_discrete(name = "Standortnutzung")+
-  scale_y_continuous(name = "Gehalt [ppm]",limits = c(0,55),breaks = seq(0,55,10)) +
+  scale_x_discrete(name = NULL) +
+  scale_y_continuous(name = "Gehalt [ppm]",limits = c(0,50),breaks = seq(0,50,10)) +
   labs(title = "Kupfer")
+```
 
-knitr::kable(kabo[1:4,1:4])
+```{r}
+#| label: tbl-kupfer
+#| tbl-cap: "Üblicher Wertebereich für Kupfergehalte in Oberböden [ppm]. tief und hoch bezeichnen das 10. und 90. Quantil der Werte"
+filter(kabo,param_txt=="Kupfer",periode == 5) |> 
+  group_by(AktStandorttyp) |> 
+  summarise(n = n(),
+            untquant = round(quantile(WertOB,.1),1),
+            Median = round(median(WertOB),1),
+            obquant = round(quantile(WertOB,.9),1)) |> 
+  knitr::kable(col.names = c("", "Anz.", "tief", "Median", "hoch")) |> 
+  column_spec(4, bold=T)
+```
 
+```{r}
+#| label: fig-quecksilber
+#| fig-cap: "Verteilung der Quecksilber-Gehalte in Oberböden unterschiedlicher Nutzung"
 filter(kabo,param_txt=="Quecksilber",periode == 5) |>
   ggplot(aes(x = AktStandorttyp,
            y = WertOB,
-           fill = AktStandorttyp)) +
+           fill = AktStandorttyp))+
+  geom_text(label = "RW = 0.5 ppm", x= -Inf, hjust= 0, y=.27,color = "gold", size = 18/.pt) +
   geom_boxplot(show.legend = F) +
-  theme_gray(base_size = 26) +
+  scale_fill_manual(values=farben) +
+  theme_gray(base_size = 22) +
   theme(panel.background = element_blank(),
         panel.grid.major.y = element_line(color = "grey85"),
         panel.grid.major.x = element_line(color = NA),
         axis.ticks = element_blank())+
-  scale_x_discrete(name = "Standortnutzung")+
-  scale_y_continuous(name = "Gehalt [ppm]",limits = c(0,0.25),breaks = seq(0,.25,.05)) +
+  scale_x_discrete(name = NULL) +
+  scale_y_continuous(name = "Gehalt [ppm]",limits = c(0,.27),breaks = seq(0,.250,.050)) +
   labs(title = "Quecksilber")
-
-knitr::kable(kabo[1:4,1:4]) 
 ```
+
+```{r}
+#| label: tbl-quecksilber
+#| tbl-cap: "Üblicher Wertebereich für Quecksilbergehalte in Oberböden [ppm]. tief und hoch bezeichnen das 10. und 90. Quantil der Werte"
+filter(kabo,param_txt=="Quecksilber",periode == 5) |> 
+  group_by(AktStandorttyp) |> 
+  summarise(n = n(),
+            untquant = round(quantile(WertOB,.1),2),
+            Median = round(median(WertOB),2),
+            obquant = round(quantile(WertOB,.9),2)) |> 
+  knitr::kable(col.names = c("", "Anz.", "tief", "Median", "hoch")) |> 
+  column_spec(4, bold=T)
+```
+:::
+
+Für viele Schwermetalle zeigt sich, dass die Belastungen mit zunehmender Bearbeitung der Böden tendenziell zunehmen. So sind Waldböden in der Regel mit Abstand am wenigsten belastet. Generell sind nur vereinzelt Böden so stark belastet, dass sie Beurteilungswerte überschreiten.
+
+Diese Auswertung deckt nur eine Auswahl von Schwermetallen ab, deren Eintrags- und Austragswege unterschiedlich sind.
+
+## Entwicklung Kennwerte
+
+Ein wichtiges Ziel der Dauerüberwachung ist das Erkennen von möglichen Veränderungen im Boden. Anhand der Kennwerte organische Substanz ("Humusgehalt", @fig-orgsub) und pH-Wert (@fig-ph) wird der Verlauf der Messwerte seit Aufnahme der Dauerüberwachung dargestellt. Da Prozesse in Böden oft stetig und langsam ablaufen, sind Veränderungen oft erst nach langer Zeit sicher festzustellen. Umso wichtiger ist ein langfristiges und standardisiertes Messnetz.
+
+### Organische Substanz (Humusgehalt)
+
+::: column-page
+```{r}
+#| label: fig-orgsub
+#| fig-cap: "Entwicklung der Humusgehalte in Oberböden unterschiedlicher Nutzung"
+#| layout-ncol: 3
+#| fig-subcap: 
+#|   - "Acker"
+#|   - "Grünland"
+#|   - "Wald"
+summ_orgsub <- filter(kabo,param_txt=="Organische Substanz", !is.na(WertOB)) |>
+  group_by(periode, AktStandorttyp) |> 
+  summarise(Med = median(WertOB),
+            Unten = quantile(WertOB,.1),
+            Oben = quantile(WertOB, .9),
+            anz = n())
+summ_orgsub |>
+  filter(AktStandorttyp=="Acker") |> 
+  ggplot(aes(x = periode,
+         y = Med)) +
+  geom_ribbon(aes(ymin = Unten, ymax = Oben), fill = farben[1], alpha = .4, show.legend = F) +
+  geom_line(color = farben[1], linewidth = 1.5) +
+  theme_gray(base_size = 22) +
+  theme(panel.background = element_blank(),
+        panel.grid.major.y = element_line(color = "grey90"),
+        panel.grid.major.x = element_line(color = NA),
+        axis.ticks = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1.2)) +
+  scale_y_continuous(name = "Gehalt [%]",limits = c(2,7.5),breaks = seq(2,7.5,.5)) +
+  scale_x_discrete(name = "Messperiode", limits = factor(1:6),breaks = factor(1:6), labels=messperioden)
+  
+
+summ_orgsub |>
+  filter(AktStandorttyp=="Grünland") |> 
+  ggplot(aes(x = periode,
+         y = Med)) +
+  geom_ribbon(aes(ymin = Unten, ymax = Oben), fill = farben[2], alpha = .4, show.legend = F) +
+  geom_line(color = farben[2], linewidth = 1.5) +
+  theme_gray(base_size = 22) +
+  theme(panel.background = element_blank(),
+        panel.grid.major.y = element_line(color = "grey90"),
+        panel.grid.major.x = element_line(color = NA),
+        axis.ticks = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1.2)) +
+  scale_y_continuous(name = "Gehalt [%]",limits = c(3.5,9.5),breaks = seq(3.5,9.5,.5)) +
+  scale_x_discrete(name = "Messperiode", limits = factor(1:6),breaks = factor(1:6), labels=messperioden)
+  
+
+summ_orgsub |>
+  filter(AktStandorttyp=="Wald") |> 
+  ggplot(aes(x = periode,
+         y = Med)) +
+  geom_ribbon(aes(ymin = Unten, ymax = Oben), fill = farben[3], alpha = .4, show.legend = F) +
+  geom_line(color = farben[3], linewidth = 1.5) +
+  theme_gray(base_size = 22) +
+  theme(panel.background = element_blank(),
+        panel.grid.major.y = element_line(color = "grey90"),
+        panel.grid.major.x = element_line(color = NA),
+        axis.ticks = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1.2)) +
+  scale_y_continuous(name = "Gehalt [%]",limits = c(3,10),breaks = seq(3,10,1)) +
+  scale_x_discrete(name = "Messperiode", limits = factor(1:6),breaks = factor(1:6), labels=messperioden)
+```
+:::
+
+Über alle Nutzungsarten hinweg sind die Humusgehalt seit Überwachungsbeginn tendenziell leicht zunehmend, am stärksten auf Grünlandstandorten.
+
+### pH-Wert
+
+::: column-page
+```{r}
+#| label: fig-ph
+#| fig-cap: "Entwicklung des pH-Werts in Oberböden unterschiedlicher Nutzung"
+#| layout-ncol: 3
+#| fig-subcap: 
+#|   - "Acker"
+#|   - "Grünland"
+#|   - "Wald"
+summ_ph <- filter(kabo,param_txt=="pH", !is.na(WertOB)) |>
+  group_by(periode, AktStandorttyp) |> 
+  summarise(Med = median(WertOB),
+            Unten = quantile(WertOB,.1),
+            Oben = quantile(WertOB, .9),
+            anz = n())
+summ_ph |>
+  filter(AktStandorttyp=="Acker") |> 
+  ggplot(aes(x = periode,
+         y = Med)) +
+  geom_ribbon(aes(ymin = Unten, ymax = Oben), fill = farben[1], alpha = .4, show.legend = F) +
+  geom_line(color = farben[1], linewidth = 1.5) +
+  theme_gray(base_size = 22) +
+  theme(panel.background = element_blank(),
+        panel.grid.major.y = element_line(color = "grey90"),
+        panel.grid.major.x = element_line(color = NA),
+        axis.ticks = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1.2)) +
+  scale_y_continuous(name = "pH-Wert",limits = c(5,7.5),breaks = seq(5,7.5,.5)) +
+  scale_x_discrete(name = "Messperiode", limits = factor(1:6),breaks = factor(1:6), labels=messperioden)
+  
+
+summ_ph |>
+  filter(AktStandorttyp=="Grünland") |> 
+  ggplot(aes(x = periode,
+         y = Med)) +
+  geom_ribbon(aes(ymin = Unten, ymax = Oben), fill = farben[2], alpha = .4, show.legend = F) +
+  geom_line(color = farben[2], linewidth = 1.5) +
+  theme_gray(base_size = 22) +
+  theme(panel.background = element_blank(),
+        panel.grid.major.y = element_line(color = "grey90"),
+        panel.grid.major.x = element_line(color = NA),
+        axis.ticks = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1.2)) +
+  scale_y_continuous(name = "pH-Wert",limits = c(4.5,7),breaks = seq(4.5,7,.5)) +
+  scale_x_discrete(name = "Messperiode", limits = factor(1:6),breaks = factor(1:6), labels=messperioden)
+  
+
+summ_ph |>
+  filter(AktStandorttyp=="Wald") |> 
+  ggplot(aes(x = periode,
+         y = Med)) +
+  geom_ribbon(aes(ymin = Unten, ymax = Oben), fill = farben[3], alpha = .4, show.legend = F) +
+  geom_line(color = farben[3], linewidth = 1.5) +
+  theme_gray(base_size = 22) +
+  theme(panel.background = element_blank(),
+        panel.grid.major.y = element_line(color = "grey90"),
+        panel.grid.major.x = element_line(color = NA),
+        axis.ticks = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1.2)) +
+  scale_y_continuous(name = "pH-Wert",limits = c(3.5,6),breaks = seq(3.5,6,.5)) +
+  scale_x_discrete(name = "Messperiode", limits = factor(1:6),breaks = factor(1:6), labels=messperioden)
+```
+:::
+
+Beim pH-Wert sind keine klaren Entwicklungen zu sehen. Die Mittelwerte bewegen sich in der Spannbreite von einer halben pH-Einheit.
+
+# Schlussfolgerungen
+
+-   Der Datensatz der Kantonalen Bodenüberwachung umfasst eine Vielzahl von Parametern
+
+-   Diese wurden hier nur exemplarisch beschrieben.
+
+-   Die Unterteilung nach Standortnutzung ist sinnvoll, zeigen sich doch teils deutliche Unterschiede sowohl in der absoluten Wertverteilung, als teilweise auch in der Entwicklung über die Zeit.
+
+-   Durch die oft langsamen Prozesse im Boden sind auch Veränderungen erst nach längerer Zeit sicher erkennnbar.
+
+-   Neben der Nutzungsart können die Daten anhand weiterer Standorteigenschaften gruppiert und ausgewertet werden. Somit lassen sich weitere Faktoren finden, welche auf die Qualität unserer Böden Einfluss haben.

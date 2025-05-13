@@ -6,21 +6,25 @@
 
 ## Projektbeschreibung
 
-- Hier eine kurze Beschreibung des Abschlussprojektes angeben. Kann direkt aus dem Bericht übernommen werden.
+- Die Kantonale Bodenüberwachung (KaBo) ist ein langfristiges Monitoringprogramm der Fachstelle Bodenschutz (FaBo). Ziel ist es, den Zustand und die Entwicklung verschiedener chemischer und physikalischer Eigenschaften des Bodens abzubilden.
 
 ## Daten
 
-- Hier eine kurze Beschreibung des Abschlussprojektes angeben. Kann direkt aus dem Bericht übernommen werden.
+Der Datensatz enthält Messdaten zu rund 500 Standorten mit den Nutzungsarten Acker, Grünland und Wald. Von 5 bis 6 Zeitpunkten für die Schwermetalle Cadmium, Chrom, Kupfer, Quecksilber sowie den Gehalt an organischer Substanz und den pH-Wert
 
 ### `daten/raw/`
 
 Hier sind die Rohdaten abegelegt welche mittels eines Skript zu bereinigten Daten umgewandelt wurden. 
+**gemeinden_utf8.csv** mit Standort-Informationen
+**kabodaten_utf8.csv** mit den Messdaten
 
 ### `daten/processed/`
 
 Hier sind die bereinigten Rohdaten zu finden. 
 
-**NAME_DER_CSV.csv**
+**gemeinden_formatiert.csv** aufbereitete Rohdatentabelle
+**kabodaten_formatiert.csv** aufbereitete Rohdatentabelle
+**daten_komplett.csv** beide Rohdatentabellen zusammengefügt und weiter formatiert
 
 ## Mitwirkende
 
