@@ -1,8 +1,13 @@
 # Abschlussprojekt rstatsZH
 
-**Datenquellen: ** [Standortinformationen (lokal erzeugt)](gemeinden.csv)
-** [Messdaten (lokal erzeugt)](kabodaten.csv)
-**Code **: [Quarto Datei](https://github.com/rstatszh-k010/projekt-Dino-Wirz/blob/master/docs/index.qml)
+**Datenquellen:** 
+
+- [Standortinformationen (lokal erzeugt)](https://github.com/rstatszh-k010/projekt-Dino-Wirz/blob/master/daten/processed/gemeinden_formatiert.csv)
+- [Messdaten (lokal erzeugt)](https://github.com/rstatszh-k010/projekt-Dino-Wirz/blob/master/daten/processed/kabodaten_formatiert.csv)
+
+**Code**: 
+
+- [Quarto Datei](https://github.com/rstatszh-k010/projekt-Dino-Wirz/blob/master/docs/index.qml)
 
 ## Projektbeschreibung
 
