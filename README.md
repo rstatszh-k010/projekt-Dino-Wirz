@@ -7,7 +7,7 @@
 
 **Code**: 
 
-- [Quarto Datei](https://github.com/rstatszh-k010/projekt-Dino-Wirz/blob/master/docs/index.qml)
+- [Quarto Datei](https://github.com/rstatszh-k010/projekt-Dino-Wirz/blob/master/docs/index.qmd)
 
 ## Projektbeschreibung
 
